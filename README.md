@@ -5,6 +5,26 @@
 Gitmal is a static page generator for Git repositories. Gitmal generates static HTML pages with files, commits,
 code highlighting, and markdown rendering.
 
+## Installation
+
+```sh
+go install github.com/antonmedv/gitmal@latest
+```
+
+## Usage
+
+Run gitmal in the repository dir. Gitmal will generate pages in _./output_ directory.
+
+```sh
+gitmal .
+```
+
+Run gitmal with `--help` flag, go get a list of available options.
+
+```sh
+gitmal --help
+```
+
 ## Screenshots
 
 <p align="center"><img src="img/gitmal-screenshot-code-highlighting.webp" alt="Gitmal Code Highlighting" width="600"></p>
