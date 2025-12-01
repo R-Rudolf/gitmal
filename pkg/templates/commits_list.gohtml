@@ -49,6 +49,21 @@
         color: var(--c-brand-2);
       }
 
+      .ref-badges {
+        display: inline-flex;
+        gap: 6px;
+        margin-left: 8px;
+      }
+
+      .badge {
+        font-size: 12px;
+        color: var(--c-text-2);
+        border: 1px solid var(--c-border);
+        padding: 2px 6px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
       .date {
         font-family: var(--font-family-mono), monospace;
         font-size: 12px;
@@ -139,7 +154,18 @@
                 <div class="cell hash">
                     <a href="{{ .Href }}">{{ .ShortHash }}</a>
                 </div>
-                <div class="cell commit-title"><a href="{{ .Href }}">{{ .Subject }}</a></div>
+                <div class="cell commit-title">
+                  <a href="{{ .Href }}">{{ .Subject }}</a>
+                  {{ if .RefNames }}
+                  <div class="ref-badges">
+                    {{ range .RefNames }}
+                      {{ if or (eq .Kind "Branch") (eq .Kind "Tag") }}
+                        <span class="badge">{{ if eq .Kind "Tag" }}tag: {{ end }}{{ .Name }}</span>
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                  {{ end }}
+                </div>
                 <div class="cell author">{{ .Author }}</div>
                 <div class="cell date">{{ .Date | FormatDate }}</div>
             </div>

@@ -40,6 +40,21 @@
         padding: 16px;
       }
 
+      .ref-badges {
+        display: inline-flex;
+        gap: 6px;
+        margin-left: 8px;
+      }
+
+      .badge {
+        font-size: 12px;
+        color: var(--c-text-2);
+        border: 1px solid var(--c-border);
+        padding: 2px 6px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
       .commit-subject {
         font-size: 16px;
         font-weight: 600;
@@ -208,7 +223,18 @@
             <div class="commit-date">{{ .Commit.Date | FormatDate }}</div>
         </div>
         <div class="commit-message">
-            <div class="commit-subject">{{ .Commit.Subject }}</div>
+            <div class="commit-subject">
+              {{ .Commit.Subject }}
+              {{ if .Commit.RefNames }}
+              <span class="ref-badges">
+                {{ range .Commit.RefNames }}
+                  {{ if or (eq .Kind "Branch") (eq .Kind "Tag") }}
+                    <span class="badge">{{ if eq .Kind "Tag" }}tag: {{ end }}{{ .Name }}</span>
+                  {{ end }}
+                {{ end }}
+              </span>
+              {{ end }}
+            </div>
             {{ if .Commit.Body }}
                 <div class="commit-body">{{ .Commit.Body }}</div>{{ end }}
         </div>
