@@ -247,7 +247,7 @@
         <div class="commit-subinfo">
             <div class="commit-branch">
                 {{ if .Commit.Branch }}
-                    <a href="../commits/{{ .Commit.Branch }}/index.html" class="badge">{{ .Commit.Branch }}</a>
+                    <a href="../commits/{{ .Commit.Branch.DirName }}/index.html" class="badge">{{ .Commit.Branch }}</a>
                 {{ end }}
             </div>
             {{ if .Commit.Parents }}
