@@ -113,3 +113,17 @@ func containsBranch(branches []git.Ref, branch string) bool {
 	}
 	return false
 }
+
+func refToFileName(ref git.Ref) string {
+	var result strings.Builder
+	for _, c := range string(ref) {
+		if (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '-' || c == '.' {
+			result.WriteByte(byte(c))
+		} else if c >= 'A' && c <= 'Z' {
+			result.WriteByte(byte(c - 'A' + 'a'))
+		} else {
+			result.WriteByte('-')
+		}
+	}
+	return result.String()
+}
