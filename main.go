@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime/pprof"
+	"strings"
 
 	"github.com/antonmedv/gitmal/pkg/git"
 
@@ -97,6 +98,7 @@ func main() {
 
 	if flagName == "" {
 		flagName = filepath.Base(input)
+		flagName = strings.TrimSuffix(flagName, ".git")
 	}
 
 	themeColor, ok := themeStyles[flagTheme]
